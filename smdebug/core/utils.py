@@ -95,6 +95,7 @@ def check_smmodelparallel_training():
 
     :return: True or False
     """
+    print('debug 6')
     global _is_using_smmodelparallel
     if _is_using_smmodelparallel is not None:
         return _is_using_smmodelparallel
@@ -114,17 +115,23 @@ def check_smmodelparallel_training():
                 _is_using_smmodelparallel = False
         except:
             _is_using_smmodelparallel = False
+    print('debug 7')
     return _is_using_smmodelparallel
 
 _smp_imported = None
+print("debug print 1")
 if check_smmodelparallel_training():
     try:
+        print("debug print 2")
         import smdistributed.modelparallel.torch as smp
 
         _smp_imported = smp
+        print("debug print 3")
     except (ImportError, ModuleNotFoundError):
+        print("debug print 4")
         _smp_imported = None
     except Exception as e:
+        print("debug print 5")
         raise SMDebugError(e)
 
 
