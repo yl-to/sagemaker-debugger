@@ -119,20 +119,18 @@ def check_smmodelparallel_training():
     return _is_using_smmodelparallel
 
 _smp_imported = None
-print("debug print 1")
-if check_smmodelparallel_training():
-    try:
-        print("debug print 2")
-        import smdistributed.modelparallel.torch as smp
+try:
+    print("debug print 2")
+    import smdistributed.modelparallel.torch as smp
 
-        _smp_imported = smp
-        print("debug print 3")
-    except (ImportError, ModuleNotFoundError):
-        print("debug print 4")
-        _smp_imported = None
-    except Exception as e:
-        print("debug print 5")
-        raise SMDebugError(e)
+    _smp_imported = smp
+    print("debug print 3")
+except (ImportError, ModuleNotFoundError):
+    print("debug print 4")
+    _smp_imported = None
+except Exception as e:
+    print("debug print 5")
+    raise SMDebugError(e)
 
 
 logger = get_logger()
