@@ -76,12 +76,6 @@ except (ModuleNotFoundError, ImportError):
         _hvd_imported = None
 
 
-logger = get_logger()
-error_handling_agent = (
-    ErrorHandlingAgent.get_error_handling_agent()
-)  # set up error handler to wrap smdebug functions
-
-
 def check_smmodelparallel_training():
     """
     The function checks whether the current job is using model parallel strategy.
@@ -132,6 +126,12 @@ if check_smmodelparallel_training():
         _smp_imported = None
     except Exception as e:
         raise SMDebugError(e)
+
+
+logger = get_logger()
+error_handling_agent = (
+    ErrorHandlingAgent.get_error_handling_agent()
+)  # set up error handler to wrap smdebug functions
 
 
 def make_numpy_array(x):
